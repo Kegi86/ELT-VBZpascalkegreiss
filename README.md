@@ -2,6 +2,7 @@
 
 ## Aufgabe 7
 
+***mysql
 SELECT
 fsi.linie,
 fsi.richtung,
@@ -36,8 +37,9 @@ where
 fsi.linie = "7" and betriebs_datum = "2019-05-06" and fw_kurz = "6" 
 
 LIMIT 40000;
+***
 
-##Aufgabe 8 a Script
+## Aufgabe 8 a Script
 
 select distinct 
 fsi.linie,
