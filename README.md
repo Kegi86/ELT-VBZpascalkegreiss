@@ -2,7 +2,8 @@
 
 ## Aufgabe 7
 
-***mysql
+~~~~sql
+
 SELECT
 fsi.linie,
 fsi.richtung,
@@ -37,7 +38,8 @@ where
 fsi.linie = "7" and betriebs_datum = "2019-05-06" and fw_kurz = "6" 
 
 LIMIT 40000;
-***
+
+~~~~
 
 ## Aufgabe 8 a Script
 
@@ -55,7 +57,7 @@ linie = "7"
 
 LIMIT 40000;
 
-##Aufgabe 8a Abfrage Ergebnis
+## Aufgabe 8a Abfrage Ergebnis
 
 |linie|richtung|fw_no|fw_lang|
 |-----|--------|-----|-------|
@@ -83,7 +85,7 @@ LIMIT 40000;
 |7|1|103|BUCH (Schleife) - WOLL für Einfahrt Glei|
 |7|1|9|BSTE - IRCH für Einfahrt|
 
-##Aufgabe 8 b
+## Aufgabe 8 b
 
 create view query_line
 as select distinct 
