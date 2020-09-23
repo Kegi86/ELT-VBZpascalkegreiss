@@ -43,6 +43,7 @@ LIMIT 40000;
 
 ## Aufgabe 8 a Script
 
+~~~~sql
 select distinct 
 fsi.linie,
 fsi.richtung,
@@ -56,7 +57,7 @@ where
 linie = "7"
 
 LIMIT 40000;
-
+~~~~
 ## Aufgabe 8a Abfrage Ergebnis
 
 |linie|richtung|fw_no|fw_lang|
@@ -87,6 +88,7 @@ LIMIT 40000;
 
 ## Aufgabe 8 b
 
+~~~~sql
 create view query_line
 as select distinct 
     linie,
@@ -97,7 +99,7 @@ from
  	fahrzeiten_soll_ist
 where
    linie = "7"
-   
+~~~~ 
 
 
 |linie|richtung|fw_no|fw_lang|
@@ -126,8 +128,8 @@ where
 |7|1|103|BUCH (Schleife) - WOLL für Einfahrt Glei|
 |7|1|9|BSTE - IRCH für Einfahrt|
 
-##Afgabe 8 c
-
+## Aufgabe 8 c
+~~~~sql
 CREATE TABLE linie (PRIMARY KEY (fahrweg_id))
 select distinct 
 fahrweg_id, 
@@ -139,7 +141,7 @@ from
 fahrzeiten_soll_ist fsi 
 where
 linie ="7"
-
+~~~~
 
 |fahrweg_id|linie|richtung|fw_no|fw_lang|
 |----------|-----|--------|-----|-------|
