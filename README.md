@@ -1,6 +1,7 @@
 # ELT-VBZpascalkegreiss
 
 ## Aufgabe 7
+
 ### Script
 ~~~~sql
 
