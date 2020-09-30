@@ -169,6 +169,10 @@ linie ="7"
 |115113|7|2|116|GAR6 - BSTE E-Bus Gleisbau MIBU|
 |115114|7|1|117|GAR6 - MIBU E-Bus Gleisbau MIBU|
 
+## Aufgabe 9
+
+![Alt-Text](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/AlleHS_7_mitBeschriftung.PNG "Ausgabe")
+
 
 ## Aufgabe 10
 
