@@ -15,6 +15,7 @@ inner join vbzdat.haltestelle h2 on
    
    order by note desc
   
+ 
    limit 20;
 
  	
