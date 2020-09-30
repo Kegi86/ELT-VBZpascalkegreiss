@@ -170,6 +170,88 @@ linie ="7"
 |115114|7|1|117|GAR6 - MIBU E-Bus Gleisbau MIBU|
 
 
+## Aufgabe 10
+
+|halt_lang|GPS_Latitude|GPS_Longitude|id|haltepunkt_id|fahrweg_id|linie|datumzeit_ist_an|datumzeit_soll_an|delay|
+|---------|------------|-------------|--|-------------|----------|-----|----------------|-----------------|-----|
+|Zürich, Garage 6 Hardau|47.382204|8.506967|7093|46016|115110|7|2019-05-11 20:21:25|2019-05-11 20:24:00|-155|
+|Zürich, Universität Irchel|47.396093|8.545106|57762|47875|99774|7|2019-05-11 00:52:59|2019-05-11 00:53:24|-25|
+|Zürich, Stampfenbachplatz|47.380301|8.542819|4315|43011|115101|7|2019-05-11 05:14:49|2019-05-11 05:15:12|-23|
+|Zürich, Wollishoferplatz|47.338309|8.530794|1|48081|99771|7|2019-05-06 05:59:39|2019-05-06 06:00:00|-21|
+|Zürich, Depot 7 Irchel|47.395078|8.543973|58024|47554|99773|7|2019-05-06 05:13:39|2019-05-06 05:14:00|-21|
+|Zürich, Laubiweg|47.394862|8.536457|4382|47739|115098|7|2019-05-11 15:32:04|2019-05-11 15:32:24|-20|
+|Zürich, Bahnhofquai/HB|47.378063|8.541673|4297|47566|115101|7|2019-05-11 05:12:46|2019-05-11 05:13:06|-20|
+|Zürich, ETH/Universitätsspital|47.377207|8.547469|4289|48592|115101|7|2019-05-11 05:07:47|2019-05-11 05:08:06|-19|
+|Zürich, Depot 2 Wollishofen|47.337389|8.531066|58007|43299|99771|7|2019-05-06 05:57:46|2019-05-06 05:58:00|-14|
+|Zürich, Schörlistrasse|47.406367|8.564466|8554|47047|99772|7|2019-05-07 05:19:58|2019-05-07 05:20:12|-14|
+|Zürich, Haldenbach|47.380116|8.548072|4293|42985|115101|7|2019-05-11 05:06:23|2019-05-11 05:06:36|-13|
+|Zürich, Tierspital|47.401645|8.551422|8514|42524|99772|7|2019-05-07 05:17:54|2019-05-07 05:18:06|-12|
+|Zürich, Kronenstrasse|47.388287|8.539236|4305|49422|115101|7|2019-05-11 05:17:36|2019-05-11 05:17:48|-12|
+|Zürich, Beckenhof|47.384221|8.540238|4296|49441|115101|7|2019-05-11 05:16:24|2019-05-11 05:16:36|-12|
+|Zürich, Roswiesen|47.402886|8.57735|8492|44434|99772|7|2019-05-07 05:22:55|2019-05-07 05:23:06|-11|
+|Zürich, Waldgarten|47.403776|8.557164|8535|47381|99772|7|2019-05-07 05:18:55|2019-05-07 05:19:06|-11|
+|Zürich, Schwamendingerplatz|47.404475|8.572137|8467|46972|99772|7|2019-05-07 05:21:26|2019-05-07 05:21:36|-10|
+|Zürich, Milchbuck|47.398163|8.542155|58555|48305|99772|7|2019-05-07 05:16:20|2019-05-07 05:16:30|-10|
+|Zürich, Glattwiesen|47.4015|8.581917|8531|44404|99772|7|2019-05-07 05:23:54|2019-05-07 05:24:00|-6|
+|Zürich, Post Wollishofen|47.344869|8.53339|20606|44510|111874|7|2019-05-10 13:40:56|2019-05-10 13:41:00|-4|
+
+## Aufgabe 12
+### Script
+
+~~~~sql
+select distinct 
+    h.halt_lang,
+    fsi.betriebsdatum,
+    fsi.fahrt_id,
+    fsi.linie,
+    fsi.richtung,
+   date_format(fsi.datumzeit_soll_ab_von, '%H:%i') as abfahrtszeit
+from
+    vbzdat.fahrzeiten_soll_ist fsi
+inner join vbzdat.haltestelle h on
+    h.halt_id = fsi.halt_id_von
+where
+ linie = "7" and fsi.richtung = "1" and fsi.betriebsdatum = "06.05.19" and fsi.fahrt_id = "40143"
+ 
+group by h.halt_lang
+order by abfahrtszeit;
+~~~~
+###Ausgabe
+
+|halt_lang|betriebsdatum|fahrt_id|linie|richtung|abfahrtszeit|
+|---------|-------------|--------|-----|--------|------------|
+|Zürich, Bahnhof Stettbach|06.05.19|40143|7|1|16:41|
+|Zürich, Mattenhof|06.05.19|40143|7|1|16:42|
+|Zürich, Probstei|06.05.19|40143|7|1|16:43|
+|Zürich, Glattwiesen|06.05.19|40143|7|1|16:44|
+|Zürich, Roswiesen|06.05.19|40143|7|1|16:45|
+|Zürich, Schwamendingerplatz|06.05.19|40143|7|1|16:47|
+|Zürich, Schörlistrasse|06.05.19|40143|7|1|16:48|
+|Zürich, Waldgarten|06.05.19|40143|7|1|16:50|
+|Zürich, Tierspital|06.05.19|40143|7|1|16:51|
+|Zürich, Milchbuck|06.05.19|40143|7|1|16:53|
+|Zürich, Guggachstrasse|06.05.19|40143|7|1|16:54|
+|Zürich, Schaffhauserplatz|06.05.19|40143|7|1|16:56|
+|Zürich, Röslistrasse|06.05.19|40143|7|1|16:57|
+|Zürich, Ottikerstrasse|06.05.19|40143|7|1|16:58|
+|Zürich, Sonneggstrasse|06.05.19|40143|7|1|16:59|
+|Zürich, Haldenegg|06.05.19|40143|7|1|17:00|
+|Zürich, Central|06.05.19|40143|7|1|17:03|
+|Zürich, Bahnhofstrasse/HB|06.05.19|40143|7|1|17:06|
+|Zürich, Rennweg|06.05.19|40143|7|1|17:07|
+|Zürich, Paradeplatz|06.05.19|40143|7|1|17:09|
+|Zürich, Stockerstrasse|06.05.19|40143|7|1|17:11|
+|Zürich, Tunnelstrasse|06.05.19|40143|7|1|17:12|
+|Zürich, Bahnhof Enge|06.05.19|40143|7|1|17:13|
+|Zürich, Museum Rietberg|06.05.19|40143|7|1|17:14|
+|Zürich, Brunaustrasse|06.05.19|40143|7|1|17:16|
+|Zürich, Billoweg|06.05.19|40143|7|1|17:17|
+|Zch, Bhf.Wollishofen/Staubstr.|06.05.19|40143|7|1|17:18|
+|Zürich, Post Wollishofen|06.05.19|40143|7|1|17:19|
+|Zürich, Morgental|06.05.19|40143|7|1|17:21|
+|Zürich, Butzenstrasse|06.05.19|40143|7|1|17:22|
+
+
 
 
 
