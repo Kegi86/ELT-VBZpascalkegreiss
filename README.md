@@ -198,8 +198,29 @@ linie ="7"
 |Zürich, Bucheggplatz|47.39822|8.533334|98|42909|115102|7|2019-05-12 00:44:48|2019-05-12 00:43:18|544|
 |Zürich, Schaffhauserplatz|47.391521|8.538706|119|48183|115102|7|2019-05-12 00:47:55|2019-05-12 00:46:06|536|
 
+## Aufgabe 11
+
+### Skript
+~~~~sql
+select distinct 
+    h.GPS_Latitude as lat,
+    h.GPS_Longitude as lng,
+    h2.halt_lang as name,
+    null as color,
+    null as note
+from
+    vbzdat.haltepunkt h
+inner join vbzdat.ankunftszeiten a on
+    h.halt_punkt_id = a.haltepunkt_id
+inner join vbzdat.haltestelle h2 on
+    h.halt_id = h2.halt_id
+
+
+group by h2.halt_lang;
+~~~~
+
 ## Aufgabe 12
-### Script
+### Skript
 
 ~~~~sql
 select distinct 
