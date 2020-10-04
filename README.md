@@ -1,5 +1,6 @@
 # ELT-VBZpascalkegreiss
-
+## Aufgabe 6
+![ERD](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_06_ERD.PNG)
 ## Aufgabe 7
 [Script Aufgabe 7](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_07_timedif.sql)
 ~~~~sql
