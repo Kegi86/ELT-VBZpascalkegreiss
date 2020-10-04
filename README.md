@@ -1,7 +1,7 @@
 # ELT-VBZpascalkegreiss
 
 ## Aufgabe 7
-[### Script](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_07_timedif.sql "### Script Aufgabe 7")
+[Script Aufgabe 7](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_07_timedif.sql "### Script Aufgabe 7")
 ~~~~sql
 
 SELECT
