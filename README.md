@@ -191,7 +191,7 @@ linie ="7"
 |115114|7|1|117|GAR6 - MIBU E-Bus Gleisbau MIBU|
 
 ## Aufgabe 9
-Es müssen in der Tabelle **fahrzeiten_soll_ist** die Spalten *datumzeit_soll_an_nach*,*datumzeit_ist_an_nach*,*datumzeit_soll_ab_nach*,*datumzeit_ist_ab_nach*
+Es müssen in der Tabelle **fahrzeiten_soll_ist** die Spalten *datumzeit_soll_an_nach*, *datumzeit_ist_an_nach*, *datumzeit_soll_ab_nach*, *datumzeit_ist_ab_nach*
 mit dem Datentyp datetaime hinzugefügt werden.   
 
 [Script Neue Spalten hinzufügen](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_09_splatenhinzuf%C3%BCgen.sql)
