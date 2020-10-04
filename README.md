@@ -305,7 +305,7 @@ group by h2.halt_lang;
    
 ~~~~
 
-![Haltestellen ohne Beschriftung](C:\Users\King Dingeling\git\ELT-VBZpascalkegreiss\Bilder_pascal_kegreiss)
+![Haltestellen mit Beschriftung](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_10.PNG)
 
 ## Aufgabe 12
 ### Script
