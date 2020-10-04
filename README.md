@@ -240,6 +240,62 @@ where
 alter table ankunftszeiten add id int primary key auto_increment first;
 ~~~~
 
+[Script Aufgabe 9 Fahrweg](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_09_fahrweg.sql)
+~~~~sql
+select
+    fsi.linie,
+    fsi.richtung,
+    fsi.betriebsdatum,
+    fsi.fahrzeug,
+    fsi.kurs,
+    fsi.seq_von,
+    fsi.halt_kurz_von1,
+    fsi.seq_nach,
+    fsi.halt_kurz_nach1,
+    fsi.datum_nach,
+    fsi.fahrt_id,
+    fsi.fw_lang
+from
+    vbzdat.fahrzeiten_soll_ist fsi
+where linie ="7" and fahrt_id = "73442" 
+order by seq_von ;
+~~~~
+
+###Abfrageergebnis
+
+|linie|richtung|betriebsdatum|fahrzeug|kurs|seq_von|halt_kurz_von1|seq_nach|halt_kurz_nach1|datum_nach|fahrt_id|fw_lang|
+|-----|--------|-------------|--------|----|-------|--------------|--------|---------------|----------|--------|-------|
+|7|1|10.05.19|3053|3|1|BSTE|2|MATT|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|2|MATT|3|PROB|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|3|PROB|4|GLAT|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|4|GLAT|5|ROSW|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|5|ROSW|6|SCHW|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|6|SCHW|7|SCHO|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|7|SCHO|8|WALD|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|8|WALD|9|TIER|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|9|TIER|10|MIBU|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|10|MIBU|11|GUGG|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|11|GUGG|12|SPLA|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|12|SPLA|13|ROES|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|13|ROES|14|OTTI|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|14|OTTI|15|SONN|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|15|SONN|16|HEGG|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|16|HEGG|17|CENT|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|17|CENT|18|BSTR|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|18|BSTR|19|RENN|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|19|RENN|20|PARA|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|20|PARA|21|STOC|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|21|STOC|22|TUNN|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|22|TUNN|23|ENGE|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|23|ENGE|24|MUSR|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|24|MUSR|25|BRUN|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|25|BRUN|26|BILO|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|26|BILO|27|BWST|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|27|BWST|28|PWOL|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|28|PWOL|29|MORG|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|29|MORG|30|BUTZ|10.05.19|73442|BSTE - WOLL|
+|7|1|10.05.19|3053|3|30|BUTZ|31|WOLL|10.05.19|73442|BSTE - WOLL|
+
 ## Aufgabe 10
 
 [Script Abfrage Delays](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_10_abfrage_delays.sql)
