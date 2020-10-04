@@ -199,57 +199,62 @@ linie ="7"
 ### Script
 
 ~~~~sql
-select distinct 
+select s1.halt_lang,
+	min(case when s1.fahrt_id = 39362 then s1.abfahrtszeit end) fahrt_id39362,
+	min(case when s1.fahrt_id = 39364 then s1.abfahrtszeit end) fahrt_id39364,
+	min(case when s1.fahrt_id = 39366 then s1.abfahrtszeit end) fahrt_id39366
+from 
+(select  
     h.halt_lang,
-    fsi.betriebsdatum,
     fsi.fahrt_id,
-    fsi.linie,
-    fsi.richtung,
-   date_format(fsi.datumzeit_soll_ab_von, '%H:%i') as abfahrtszeit
+ 	date_format(fsi.datumzeit_soll_ab_von, '%H:%i') as abfahrtszeit
 from
     vbzdat.fahrzeiten_soll_ist fsi
 inner join vbzdat.haltestelle h on
     h.halt_id = fsi.halt_id_von
-where
- linie = "7" and fsi.richtung = "1" and fsi.betriebsdatum = "06.05.19" and fsi.fahrt_id = "40143"
- 
-group by h.halt_lang
-order by abfahrtszeit;
-~~~~
-###Ausgabe
+    and fsi.linie = "7" and fsi.richtung = "1" and fsi.betriebsdatum = "06.05.19" and fsi.fahrt_id in (39362,39364,39366)    where date_format(fsi.datumzeit_soll_ab_von, '%H:%i') is not null
+    
+) s1
 
-|halt_lang|betriebsdatum|fahrt_id|linie|richtung|abfahrtszeit|
-|---------|-------------|--------|-----|--------|------------|
-|Zürich, Bahnhof Stettbach|06.05.19|40143|7|1|16:41|
-|Zürich, Mattenhof|06.05.19|40143|7|1|16:42|
-|Zürich, Probstei|06.05.19|40143|7|1|16:43|
-|Zürich, Glattwiesen|06.05.19|40143|7|1|16:44|
-|Zürich, Roswiesen|06.05.19|40143|7|1|16:45|
-|Zürich, Schwamendingerplatz|06.05.19|40143|7|1|16:47|
-|Zürich, Schörlistrasse|06.05.19|40143|7|1|16:48|
-|Zürich, Waldgarten|06.05.19|40143|7|1|16:50|
-|Zürich, Tierspital|06.05.19|40143|7|1|16:51|
-|Zürich, Milchbuck|06.05.19|40143|7|1|16:53|
-|Zürich, Guggachstrasse|06.05.19|40143|7|1|16:54|
-|Zürich, Schaffhauserplatz|06.05.19|40143|7|1|16:56|
-|Zürich, Röslistrasse|06.05.19|40143|7|1|16:57|
-|Zürich, Ottikerstrasse|06.05.19|40143|7|1|16:58|
-|Zürich, Sonneggstrasse|06.05.19|40143|7|1|16:59|
-|Zürich, Haldenegg|06.05.19|40143|7|1|17:00|
-|Zürich, Central|06.05.19|40143|7|1|17:03|
-|Zürich, Bahnhofstrasse/HB|06.05.19|40143|7|1|17:06|
-|Zürich, Rennweg|06.05.19|40143|7|1|17:07|
-|Zürich, Paradeplatz|06.05.19|40143|7|1|17:09|
-|Zürich, Stockerstrasse|06.05.19|40143|7|1|17:11|
-|Zürich, Tunnelstrasse|06.05.19|40143|7|1|17:12|
-|Zürich, Bahnhof Enge|06.05.19|40143|7|1|17:13|
-|Zürich, Museum Rietberg|06.05.19|40143|7|1|17:14|
-|Zürich, Brunaustrasse|06.05.19|40143|7|1|17:16|
-|Zürich, Billoweg|06.05.19|40143|7|1|17:17|
-|Zch, Bhf.Wollishofen/Staubstr.|06.05.19|40143|7|1|17:18|
-|Zürich, Post Wollishofen|06.05.19|40143|7|1|17:19|
-|Zürich, Morgental|06.05.19|40143|7|1|17:21|
-|Zürich, Butzenstrasse|06.05.19|40143|7|1|17:22|
+group by s1.halt_lang
+order by s1.abfahrtszeit
+;
+~~~~
+### Ausgabe
+
+|halt_lang|fahrt_id39362|fahrt_id39364|fahrt_id39366|
+|---------|-------------|-------------|-------------|
+|Zürich, Bahnhof Stettbach|07:19|08:57|10:34|
+|Zürich, Mattenhof|07:20|08:58|10:35|
+|Zürich, Probstei|07:21|08:59|10:36|
+|Zürich, Glattwiesen|07:22|09:00|10:37|
+|Zürich, Roswiesen|07:24|09:01|10:38|
+|Zürich, Schwamendingerplatz|07:25|09:02|10:40|
+|Zürich, Schörlistrasse|07:27|09:04|10:41|
+|Zürich, Waldgarten|07:28|09:05|10:43|
+|Zürich, Tierspital|07:29|09:06|10:44|
+|Zürich, Milchbuck|07:31|09:08|10:46|
+|Zürich, Guggachstrasse|07:33|09:09|10:47|
+|Zürich, Schaffhauserplatz|07:34|09:11|10:48|
+|Zürich, Röslistrasse|07:35|09:12|10:50|
+|Zürich, Ottikerstrasse|07:37|09:14|10:51|
+|Zürich, Sonneggstrasse|07:38|09:15|10:52|
+|Zürich, Haldenegg|07:39|09:16|10:53|
+|Zürich, Central|07:40|09:17|10:55|
+|Zürich, Bahnhofstrasse/HB|07:43|09:20|10:58|
+|Zürich, Rennweg|07:45|09:22|10:59|
+|Zürich, Paradeplatz|07:47|09:24|11:01|
+|Zürich, Stockerstrasse|07:48|09:25|11:03|
+|Zürich, Tunnelstrasse|07:49|09:26|11:04|
+|Zürich, Bahnhof Enge|07:51|09:28|11:05|
+|Zürich, Museum Rietberg|07:52|09:29|11:06|
+|Zürich, Brunaustrasse|07:53|09:30|11:07|
+|Zürich, Billoweg|07:54|09:31|11:09|
+|Zch, Bhf.Wollishofen/Staubstr.|07:55|09:32|11:10|
+|Zürich, Post Wollishofen|07:56|09:33|11:11|
+|Zürich, Morgental|07:58|09:35|11:12|
+|Zürich, Butzenstrasse|07:59|09:36|11:13|
+
 
 
 
