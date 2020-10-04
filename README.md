@@ -1,7 +1,7 @@
 # ELT-VBZpascalkegreiss
 
 ## Aufgabe 7
-
+### Script
 ~~~~sql
 
 SELECT
@@ -35,11 +35,26 @@ TIMESTAMPDIFF (SECOND, datumzeit_ist_an_von, datumzeit_ist_ab_von) as halt_ist_t
 FROM
 fahrzeiten_soll_ist fsi
 where 
-fsi.linie = "7" and betriebs_datum = "2019-05-06" and fw_kurz = "6" 
-
+fsi.linie = "7" and betriebs_datum = "2019-05-06" and fw_kurz = "6" and fahrt_id = "40108" 
+order by seq_von 
 LIMIT 40000;
 
 ~~~~
+
+### Ausgabe 
+|linie|richtung|fahrzeug|kurs|seq_von|halt_id_von|halt_id_nach|halt_punkt_id_von|halt_punkt_id_nach|fahrt_id|fahrweg_id|fw_no|fw_typ|fw_kurz|fw_lang|betriebs_datum|datumzeit_soll_an_von|datumzeit_ist_an_von|datumzeit_soll_ab_von|datumzeit_ist_ab_von|datum__nach|timediff_an|timediff_an_seconds|timediff_ab|timediff_ab_seconds|halt_soll_time_seconds|halt_ist_time_seconds|
+|-----|--------|--------|----|-------|-----------|------------|-----------------|------------------|--------|----------|-----|------|-------|-------|--------------|---------------------|--------------------|---------------------|--------------------|-----------|-----------|-------------------|-----------|-------------------|----------------------|---------------------|
+|7|2|2116|11|1|1504|2406|48305|42524|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:34:30|2019-05-06 06:34:05|2019-05-06 06:34:30|2019-05-06 06:34:05|2019-05-06|00:00:25|-25|00:00:25|-25|0|0|
+|7|2|2116|11|2|2406|2375|42524|47381|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:36:06|2019-05-06 06:36:25|2019-05-06 06:36:18|2019-05-06 06:36:42|2019-05-06|00:00:19|19|00:00:24|24|12|17|
+|7|2|2116|11|3|2375|2046|47381|47047|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:37:06|2019-05-06 06:37:31|2019-05-06 06:37:18|2019-05-06 06:37:34|2019-05-06|00:00:25|25|00:00:16|16|12|3|
+|7|2|2116|11|4|2046|1501|47047|46972|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:38:12|2019-05-06 06:38:38|2019-05-06 06:38:24|2019-05-06 06:38:48|2019-05-06|00:00:26|26|00:00:24|24|12|10|
+|7|2|2116|11|5|1501|2510|46972|44434|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:39:36|2019-05-06 06:40:05|2019-05-06 06:39:54|2019-05-06 06:40:19|2019-05-06|00:00:29|29|00:00:25|25|18|14|
+|7|2|2116|11|6|2510|2052|44434|44404|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:41:06|2019-05-06 06:41:31|2019-05-06 06:41:18|2019-05-06 06:41:40|2019-05-06|00:00:25|25|00:00:22|22|12|9|
+|7|2|2116|11|7|2052|2489|44404|45000|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:42:00|2019-05-06 06:42:29|2019-05-06 06:42:12|2019-05-06 06:42:32|2019-05-06|00:00:29|29|00:00:20|20|12|3|
+|7|2|2116|11|8|2489|2356|45000|43478|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:42:54|2019-05-06 06:43:20|2019-05-06 06:43:06|2019-05-06 06:43:33|2019-05-06|00:00:26|26|00:00:27|27|12|13|
+|7|2|2116|11|9|2356|2316|43478|43731|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:43:54|2019-05-06 06:44:22|2019-05-06 06:44:06|2019-05-06 06:44:31|2019-05-06|00:00:28|28|00:00:25|25|12|9|
+|7|2|2116|11|10|2316|2316|43731|45817|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:45:12|2019-05-06 06:45:46|2019-05-06 06:45:30|2019-05-06 06:45:58|2019-05-06|00:00:34|34|00:00:28|28|18|12|
+
 
 ## Aufgabe 8 a Script
 
@@ -169,7 +184,59 @@ linie ="7"
 |115113|7|2|116|GAR6 - BSTE E-Bus Gleisbau MIBU|
 |115114|7|1|117|GAR6 - MIBU E-Bus Gleisbau MIBU|
 
+## Aufgabe 9
+### Neue Spalten hinzufügen
+~~~~sql
+alter table fahrzeiten_soll_ist add datumzeit_soll_an_nach datetime null;
+alter table fahrzeiten_soll_ist add datumzeit_ist_an_nach datetime null;
+alter table fahrzeiten_soll_ist add datumzeit_soll_ab_nach datetime null;
+alter table fahrzeiten_soll_ist add datumzeit_ist_ab_nach datetime null;
+~~~~
 
+### _nach Zeiten einlesen
+
+~~~~sql
+update fahrzeiten_soll_ist set datumzeit_soll_an_nach = date_add(str_to_date(datum__nach,'%Y-%m-%d'), interval soll_an_nach second);
+update fahrzeiten_soll_ist set datumzeit_soll_ab_nach = date_add(str_to_date(datum__nach,'%Y-%m-%d'), interval soll_ab_nach second);
+update fahrzeiten_soll_ist set datumzeit_ist_ab_nach = date_add(str_to_date(datum__nach,'%Y-%m-%d'), interval ist_ab_nach second);
+update fahrzeiten_soll_ist set datumzeit_ist_an_nach = date_add(str_to_date(datum__nach,'%Y-%m-%d'), interval ist_an_nach1 second);
+~~~~
+
+### Tabelle erstellen
+
+drop table if exists ankunftszeiten;
+
+create table ankunftszeiten
+
+select  
+	halt_punkt_id_nach as haltepunkt_id,
+	fahrweg_id,
+	fahrt_id,
+	datumzeit_ist_an_nach as datumzeit_ist_an,
+	datumzeit_soll_an_nach as datumzeit_soll_an,
+	datumzeit_soll_ab_nach as datumzeit_soll_ab,
+	timestampdiff (second, datumzeit_soll_an_nach, datumzeit_ist_an_nach) as delay
+from 
+	fahrzeiten_soll_ist fsi 
+where 
+	linie ="7"
+	
+union 
+
+select
+	halt_punkt_id_von as haltepunkt_id,
+	fahrweg_id,
+	fahrt_id,
+	datumzeit_ist_an_von as datumzeit_ist_an,
+	datumzeit_soll_an_von as datumzeit_soll_an,
+	datumzeit_soll_ab_von as datumzeit_soll_ab,
+	timestampdiff (second, datumzeit_soll_an_von, datumzeit_ist_an_von) as delay
+from 
+	fahrzeiten_soll_ist fsi 
+where 
+	seq_von ="1" and
+	linie ="7";
+alter table ankunftszeiten add id int primary key auto_increment first;
 ## Aufgabe 10
 ### Script
 ~~~~sql

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="test1">
+	<entities>
+		<data-source id="mysql8-1746d0829e2-17b0fb848f9b3d9a">
+			<entity id="1" name="ankunftszeiten" fq-name="vbzdat.ankunftszeiten">
+				<path name="vbzdat"/>
+			</entity>
+			<entity id="2" name="aufgabe_14_nach" fq-name="vbzdat.aufgabe_14_nach">
+				<path name="vbzdat"/>
+			</entity>
+			<entity id="3" name="aufgabe_14_von" fq-name="vbzdat.aufgabe_14_von">
+				<path name="vbzdat"/>
+			</entity>
+			<entity id="4" name="fahrplan" fq-name="vbzdat.fahrplan">
+				<path name="vbzdat"/>
+			</entity>
+			<entity id="5" name="fahrplan_neu" fq-name="vbzdat.fahrplan_neu">
+				<path name="vbzdat"/>
+			</entity>
+			<entity id="6" name="fahrzeiten_soll_ist" fq-name="vbzdat.fahrzeiten_soll_ist">
+				<path name="vbzdat"/>
+			</entity>
+			<entity id="7" name="haltepunkt" fq-name="vbzdat.haltepunkt">
+				<path name="vbzdat"/>
+			</entity>
+			<entity id="8" name="haltestelle" fq-name="vbzdat.haltestelle">
+				<path name="vbzdat"/>
+			</entity>
+			<entity id="9" name="linie" fq-name="vbzdat.linie">
+				<path name="vbzdat"/>
+			</entity>
+		</data-source>
+	</entities>
+	<relations>
+		<relation name="fahrzeiten_soll_ist_FK" fq-name="vbzdat.fahrzeiten_soll_ist.fahrzeiten_soll_ist_FK" type="fk" pk-ref="7" fk-ref="6"/>
+		<relation name="fahrzeiten_soll_ist_FK_1" fq-name="vbzdat.fahrzeiten_soll_ist.fahrzeiten_soll_ist_FK_1" type="fk" pk-ref="7" fk-ref="6"/>
+		<relation name="haltepunkt_FK" fq-name="vbzdat.haltepunkt.haltepunkt_FK" type="fk" pk-ref="8" fk-ref="7"/>
+	</relations>
+</diagram>

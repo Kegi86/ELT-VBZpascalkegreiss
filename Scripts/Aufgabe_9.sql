@@ -1,16 +1,33 @@
-create table ankunftszeiten(
-id int not null auto_increment,
-haltepunkt_id int,
-fahrweg_id int,
-fahrt_id int,
-datumszeit_ist_an date,
-datumszeit_soll_an date,
-datumszeit_soll_ab date,
-delay int,
-primary key (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+drop table if exists ankunftszeiten;
 
+create table ankunftszeiten
 
-ALTER TABLE vbzdat.ankunftszeiten ADD CONSTRAINT ankunftszeiten_FK FOREIGN KEY (haltepunkt_id) REFERENCES vbzdat.haltepunkt(halt_punkt_id);
-ALTER TABLE vbzdat.ankunftszeiten ADD CONSTRAINT ankunftszeiten_FK_1 FOREIGN KEY (fahrweg_id) REFERENCES vbzdat.linie(fahrweg_id);
+select  
+	halt_punkt_id_nach as haltepunkt_id,
+	fahrweg_id,
+	fahrt_id,
+	datumzeit_ist_an_nach as datumzeit_ist_an,
+	datumzeit_soll_an_nach as datumzeit_soll_an,
+	datumzeit_soll_ab_nach as datumzeit_soll_ab,
+	timestampdiff (second, datumzeit_soll_an_nach, datumzeit_ist_an_nach) as delay
+from 
+	fahrzeiten_soll_ist fsi 
+where 
+	linie ="7"
+	
+union 
 
+select
+	halt_punkt_id_von as haltepunkt_id,
+	fahrweg_id,
+	fahrt_id,
+	datumzeit_ist_an_von as datumzeit_ist_an,
+	datumzeit_soll_an_von as datumzeit_soll_an,
+	datumzeit_soll_ab_von as datumzeit_soll_ab,
+	timestampdiff (second, datumzeit_soll_an_von, datumzeit_ist_an_von) as delay
+from 
+	fahrzeiten_soll_ist fsi 
+where 
+	seq_von ="1" and
+	linie ="7";
+alter table ankunftszeiten add id int primary key auto_increment first;
