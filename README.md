@@ -237,7 +237,9 @@ where
 	seq_von ="1" and
 	linie ="7";
 alter table ankunftszeiten add id int primary key auto_increment first;
+
 ## Aufgabe 10
+
 ### Script
 ~~~~sql
 select
@@ -287,6 +289,11 @@ inner join vbzdat.haltestelle h2 on
 |47.39822|8.533334|Zürich, Bucheggplatz||544|
 |47.391521|8.538706|Zürich, Schaffhauserplatz||536|
 
+#### Diese Abfrage Exportiert als CSV spalte Color mit diversen farben ergänzt und alle Trennzeichen zu , konvertiert. Danach auf https://maps.co/gis/ importiert.
+
+### Screenshot von Karte (gewisse Notes gelöscht damit Stecknadel ersichtlich)
+![20HS mit grösstem delay](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_10.PNG)
+
 ## Aufgabe 11
 ~~~~sql
 select distinct 
@@ -304,8 +311,11 @@ inner join vbzdat.haltestelle h2 on
 group by h2.halt_lang;
    
 ~~~~
+### Screenshot Karte mit Note
+![Alle_HS_L7_mit beschriftung](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_11_AlleHS_7_mitBeschriftung.PNG)
 
-![Haltestellen mit Beschriftung](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_10.PNG)
+### Screenshot Karte ohne Note
+![Alle_HS_L7_ohne beschriftung](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_11_AlleHS_7_ohneBesch.PNG)
 
 ## Aufgabe 12
 ### Script
