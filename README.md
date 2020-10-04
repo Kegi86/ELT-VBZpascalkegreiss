@@ -342,6 +342,8 @@ limit 20;
 ### Screenshot von Karte (gewisse Namen gelöscht damit Stecknadel ersichtlich)
 ![20HS mit grösstem delay](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_10.PNG)
 
+## Aufgabe 11
+
 [Script Aufgabe 11](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_11_visualisierung_linie.sql)
 ~~~~sql
 select distinct
@@ -363,6 +365,7 @@ group by h2.halt_lang;
 
 ### Screenshot Karte ohne Namen
 ![Alle_HS_L7_ohne beschriftung](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_11_AlleHS_7_ohneBesch.PNG)
+[CSV Datei](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Aufgabe_11_csv_export.csv)
 
 ## Aufgabe 12
 [Script Aufgabe 12](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_12_fahrplan_pivot.sql)
