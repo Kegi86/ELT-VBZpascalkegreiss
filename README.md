@@ -192,7 +192,7 @@ linie ="7"
 
 ## Aufgabe 9
 Es müssen in der Tabelle **fahrzeiten_soll_ist** die Spalten *datumzeit_soll_an_nach*, *datumzeit_ist_an_nach*, *datumzeit_soll_ab_nach*, *datumzeit_ist_ab_nach*
-mit dem Datentyp datetaime hinzugefügt werden.   
+mit dem Datentyp DateTime hinzugefügt werden.   
 
 [Script Neue Spalten hinzufügen](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_09_splatenhinzuf%C3%BCgen.sql)
 ~~~~sql
@@ -202,6 +202,8 @@ alter table fahrzeiten_soll_ist add datumzeit_soll_ab_nach datetime null;
 alter table fahrzeiten_soll_ist add datumzeit_ist_ab_nach datetime null;
 ~~~~
 
+Die im vorherigen Schritt erstellten Spalten werden mit Daten befüllt dazu werden die bestehenden Daten konvertiert.
+ 
 [Script _nach Zeiten einlesen](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_09_nach_zeiten%20einlesen.sql)
 
 ~~~~sql
@@ -267,7 +269,7 @@ where linie ="7" and fahrt_id = "73442"
 order by seq_von ;
 ~~~~
 
-###Abfrageergebnis
+### Abfrageergebnis
 
 |linie|richtung|betriebsdatum|fahrzeug|kurs|seq_von|halt_kurz_von1|seq_nach|halt_kurz_nach1|datum_nach|fahrt_id|fw_lang|
 |-----|--------|-------------|--------|----|-------|--------------|--------|---------------|----------|--------|-------|
@@ -405,6 +407,65 @@ limit 20;
 ![20HS mit grösstem delay](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_10.PNG)
 
 ## Aufgabe 11
+
+### Aufgabe 11 CSV Datei Inhalt "Zürich," durch "Zürich-" ersetzt
+
+"lat","lng","name","color","note"
+47.338309,8.530794,"Zürich- Wollishoferplatz",,
+47.398163,8.542155,"Zürich- Milchbuck",,
+47.390873,8.545435,"Zürich- Letzistrasse",,
+47.37738,8.541672,"Zürich- Bahnhofquai/HB",,
+47.394862,8.536457,"Zürich- Laubiweg",,
+47.393791,8.544966,"Zürich- Langmauerstrasse",,
+47.376916,8.544086,"Zürich- Central",,
+47.37989,8.542532,"Zürich- Stampfenbachplatz",,
+47.39822,8.533334,"Zürich- Bucheggplatz",,
+47.383344,8.548192,"Zürich- Winkelriedstrasse",,
+47.380358,8.548197,"Zürich- Haldenbach",,
+47.377794,8.548236,"Zürich- ETH/Universitätsspital",,
+47.389011,8.546337,"Zürich- Kinkelstrasse",,
+47.386104,8.548316,"Zürich- Seilbahn Rigiblick",,
+47.378838,8.545304,"Zürich- Haldenegg",,
+47.391521,8.538706,"Zürich- Schaffhauserplatz",,
+47.38394,8.540404,"Zürich- Beckenhof",,
+47.387926,8.539361,"Zürich- Kronenstrasse",,
+47.400217,8.586169,"Zürich- Probstei",,
+47.404643,8.571584,"Zürich- Schwamendingerplatz",,
+47.398597,8.590758,"Zürich- Mattenhof",,
+47.402852,8.577164,"Zürich- Roswiesen",,
+47.395833,8.540306,"Zürich- Guggachstrasse",,
+47.403805,8.568042,"Zürich- Friedrichstrasse",,
+47.401476,8.581612,"Zürich- Glattwiesen",,
+47.403567,8.557318,"Zürich- Waldgarten",,
+47.40231,8.55337,"Zürich- Tierspital",,
+47.39676,8.595474,"Zürich- Bahnhof Stettbach",,
+47.404101,8.562563,"Zürich- Frohburg",,
+47.343586,8.530174,"Zürich- Morgental",,
+47.383119,8.543513,"Zürich- Sonneggstrasse",,
+47.364425,8.531475,"Zürich- Bahnhof Enge",,
+47.344869,8.53339,"Zürich- Post Wollishofen",,
+47.347212,8.532909,"Zch- Bhf.Wollishofen/Staubstr.",,
+47.373301,8.538304,"Zürich- Rennweg",,
+47.360925,8.531588,"Zürich- Museum Rietberg",,
+47.367969,8.536195,"Zürich- Stockerstrasse",,
+47.376114,8.539501,"Zürich- Bahnhofstrasse/HB",,
+47.36984,8.539093,"Zürich- Paradeplatz",,
+47.385378,8.542487,"Zürich- Ottikerstrasse",,
+47.351836,8.531971,"Zürich- Billoweg",,
+47.366461,8.533012,"Zürich- Tunnelstrasse",,
+47.388842,8.540492,"Zürich- Röslistrasse",,
+47.341084,8.530374,"Zürich- Butzenstrasse",,
+47.35634,8.532196,"Zürich- Brunaustrasse",,
+47.396093,8.545106,"Zürich- Universität Irchel",,
+47.337389,8.531066,"Zürich- Depot 2 Wollishofen",,
+47.382204,8.506967,"Zürich- Garage 6 Hardau",,
+47.406047,8.564062,"Zürich- Schörlistrasse",,
+47.395078,8.543973,"Zürich- Depot 7 Irchel",,
+
+
+### Printscreen Export Assistent
+
+![Exportassi](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe11Exportassi.PNG)
 
 [Script Aufgabe 11](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_11_visualisierung_linie.sql)
 ~~~~sql
