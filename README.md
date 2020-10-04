@@ -1,7 +1,7 @@
 # ELT-VBZpascalkegreiss
 
 ## Aufgabe 7
-### Script
+[### Script](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_07_timedif.sql "### Script Aufgabe 7")
 ~~~~sql
 
 SELECT
@@ -203,7 +203,7 @@ update fahrzeiten_soll_ist set datumzeit_ist_an_nach = date_add(str_to_date(datu
 ~~~~
 
 ### Tabelle erstellen
-
+~~~~sql
 drop table if exists ankunftszeiten;
 
 create table ankunftszeiten
@@ -237,6 +237,7 @@ where
 	seq_von ="1" and
 	linie ="7";
 alter table ankunftszeiten add id int primary key auto_increment first;
+~~~~
 
 ## Aufgabe 10
 
@@ -337,7 +338,7 @@ limit 20;
 
 #### Diese Abfrage Exportiert als CSV spalte Color mit diversen farben ergänzt und alle Trennzeichen zu , konvertiert. Danach auf https://maps.co/gis/ importiert.
 
-### Screenshot von Karte (gewisse Notes gelöscht damit Stecknadel ersichtlich)
+### Screenshot von Karte (gewisse Namen gelöscht damit Stecknadel ersichtlich)
 ![20HS mit grösstem delay](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_10.PNG)
 
 ## Aufgabe 11
@@ -356,10 +357,10 @@ inner join vbzdat.haltestelle h2 on
     h.halt_id = h2.halt_id
 group by h2.halt_lang;
 ~~~~
-### Screenshot Karte mit Note
+### Screenshot Karte mit Namen
 ![Alle_HS_L7_mit beschriftung](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_11_AlleHS_7_mitBeschriftung.PNG)
 
-### Screenshot Karte ohne Note
+### Screenshot Karte ohne Namen
 ![Alle_HS_L7_ohne beschriftung](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_11_AlleHS_7_ohneBesch.PNG)
 
 ## Aufgabe 12
@@ -448,17 +449,84 @@ limit 4;
 
 ### Abfrageergebnis 
 
-"lat","lng","name","color","note"
-47.377794,8.548236,"Zürich, ETH/Universitätsspital",,0.0022942741289195662
-47.376916,8.544086,"Zürich, Central",,0.0032180592767303354
-47.378838,8.545304,"Zürich, Haldenegg",,0.0035907017464634743
-47.380358,8.548197,"Zürich, Haldenbach",,0.00472161627634625
+|lat|lng|name|color|note|
+|---|---|----|-----|----|
+|47.377794|8.548236|Zürich, ETH/Universitätsspital||0.0022942741289195662|
+|47.376916|8.544086|Zürich, Central||0.0032180592767303354|
+|47.378838|8.545304|Zürich, Haldenegg||0.0035907017464634743|
+|47.380358|8.548197|Zürich, Haldenbach||0.00472161627634625|
+
 
 #### Dies als CSV exportiert und die Farbcodes eingestezt in der Spalte "color" alle ; ersetzt durch , und in https://maps.co/gis/ importiert
 
 ### Screenshot Map - Mein Standort
 
 ![Mein_Standort](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_13_distance.PNG)
+
+## Aufgabe 14
+
+[### Script]()
+~~~~sql
+select
+    fsi.linie,
+    h2.halt_lang as von_haltestelle,
+    h4.halt_lang as nach_haltestelle,
+   	SQRT(POW((h.GPS_Latitude - h3.GPS_Latitude), 2) + POW((h3.GPS_Longitude - h.GPS_Longitude)* COS(h.GPS_Latitude), 2)) AS distance
+from
+    vbzdat.fahrzeiten_soll_ist fsi
+inner join vbzdat.haltepunkt h on
+    fsi.halt_punkt_id_von = h.halt_punkt_id
+inner join vbzdat.haltestelle h2 on
+    h.halt_id = h2.halt_id
+inner join vbzdat.haltepunkt h3 on
+    h3.halt_punkt_id = fsi.halt_punkt_id_nach
+inner join vbzdat.haltestelle h4 on
+    h3.halt_id = h4.halt_id
+where linie = "7" and betriebsdatum = "06.05.19"  and richtung = "1"
+group by h2.halt_lang
+order by distance asc
+;
+~~~~
+
+## Abfrageergebnis 
+|linie|von_haltestelle|nach_haltestelle|distance|
+|-----|---------------|----------------|--------|
+|7|Zürich, Depot 2 Wollishofen|Zürich, Wollishoferplatz|0.000957633853264|
+|7|Zürich, Universität Irchel|Zürich, Depot 7 Irchel|0.0014903441451430788|
+|7|Zch, Bhf.Wollishofen/Staubstr.|Zürich, Post Wollishofen|0.002252070530273783|
+|7|Zürich, Milchbuck|Zürich, Guggachstrasse|0.002364137340949413|
+|7|Zürich, Butzenstrasse|Zürich, Wollishoferplatz|0.002478035314777722|
+|7|Zürich, Tunnelstrasse|Zürich, Bahnhof Enge|0.0024983260708551216|
+|7|Zürich, Morgental|Zürich, Butzenstrasse|0.0025494690119547696|
+|7|Zürich, Stockerstrasse|Zürich, Tunnelstrasse|0.0025954032491588373|
+|7|Zürich, Sonneggstrasse|Zürich, Haldenegg|0.0027274203397414927|
+|7|Zürich, Post Wollishofen|Zürich, Morgental|0.0029240237214831336|
+|7|Zürich, Ottikerstrasse|Zürich, Sonneggstrasse|0.0031343392315264086|
+|7|Zürich, Rennweg|Zürich, Paradeplatz|0.003236467956123264|
+|7|Zürich, Haldenegg|Zürich, Central|0.0032463633074815727|
+|7|Zürich, Bahnhofstrasse/HB|Zürich, Rennweg|0.0032531568026314623|
+|7|Zürich, Röslistrasse|Zürich, Ottikerstrasse|0.003261938397533873|
+|7|Zürich, Schaffhauserplatz|Zürich, Röslistrasse|0.0034873693088779438|
+|7|Zürich, Bahnhof Enge|Zürich, Museum Rietberg|0.0035219724081222447|
+|7|Zürich, Depot 7 Irchel|Zürich, Milchbuck|0.003547559822155532|
+|7|Zürich, Central|Zürich, Bahnhofstrasse/HB|0.004080791251615068|
+|7|Zürich, Paradeplatz|Zürich, Stockerstrasse|0.004188115351739438|
+|7|Zürich, Guggachstrasse|Zürich, Schaffhauserplatz|0.004242774805900372|
+|7|Zürich, Brunaustrasse|Zürich, Billoweg|0.004494930356499946|
+|7|Zürich, Probstei|Zürich, Glattwiesen|0.004511997288707786|
+|7|Zürich, Museum Rietberg|Zürich, Brunaustrasse|0.004638086665295955|
+|7|Zürich, Billoweg|Zch, Bhf.Wollishofen/Staubstr.|0.004664905553256798|
+|7|Zürich, Mattenhof|Zürich, Probstei|0.004765009255366157|
+|7|Zürich, Waldgarten|Zürich, Tierspital|0.004906140624967453|
+|7|Zürich, Glattwiesen|Zürich, Roswiesen|0.004910492390312646|
+|7|Zürich, Bahnhof Stettbach|Zürich, Mattenhof|0.0051015434886906115|
+|7|Zürich, Roswiesen|Zürich, Schwamendingerplatz|0.005317270437992545|
+|7|Zürich, Schwamendingerplatz|Zürich, Schörlistrasse|0.007225322949115773|
+|7|Zürich, Schörlistrasse|Zürich, Waldgarten|0.007344059514367677|
+|7|Zürich, Tierspital|Zürich, Milchbuck|0.01100497445354692|
+
+
+
 
 
 
