@@ -1,3 +1,4 @@
+drop view if exists query_line;
 create view query_line
 as select distinct 
     linie,

@@ -1,4 +1,5 @@
-select distinct h.GPS_Latitude as lat,
+select distinct 
+	h.GPS_Latitude as lat,
     h.GPS_Longitude as lng,
     h2.halt_lang as name,
     null as color,
