@@ -9,4 +9,5 @@ from
  	fahrzeiten_soll_ist
 where
    linie = "7"
+   ;
    

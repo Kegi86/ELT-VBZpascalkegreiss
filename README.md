@@ -75,7 +75,7 @@ linie = "7"
 
 LIMIT 40000;
 ~~~~
-## Aufgabe 8a Abfrage Ergebnis
+### Abfrageergebnis
 
 |linie|richtung|fw_no|fw_lang|
 |-----|--------|-----|-------|
@@ -106,16 +106,18 @@ LIMIT 40000;
 ## Aufgabe 8b
 [Script Aufgabe 8b](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_08_b.sql)
 ~~~~sql
+drop view if exists query_line;
 create view query_line
 as select distinct 
     linie,
-	richtung,
+    richtung,
     fw_no,
     fw_lang
 from
  	fahrzeiten_soll_ist
 where
-   linie = "7"
+	inie = "7"
+   ;
 ~~~~ 
 
 ### Abfrageergebnis 8b
@@ -189,6 +191,9 @@ linie ="7"
 |115114|7|1|117|GAR6 - MIBU E-Bus Gleisbau MIBU|
 
 ## Aufgabe 9
+#### Es müssen in der Tabelle **fahrzeiten_soll_ist** die Spalten *datumzeit_soll_an_nach*,*datumzeit_ist_an_nach*,*datumzeit_soll_ab_nach*,*datumzeit_ist_ab_nach*
+#### mit dem Datentyp datetaime hinzugefügt werden.   
+
 [Script Neue Spalten hinzufügen](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_09_splatenhinzuf%C3%BCgen.sql)
 ~~~~sql
 alter table fahrzeiten_soll_ist add datumzeit_soll_an_nach datetime null;
