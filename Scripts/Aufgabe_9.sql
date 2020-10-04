@@ -10,12 +10,9 @@ select
 	datumzeit_soll_an_nach as datumzeit_soll_an,
 	datumzeit_soll_ab_nach as datumzeit_soll_ab,
 	timestampdiff (second, datumzeit_soll_an_nach, datumzeit_ist_an_nach) as delay
-	
-	from 
+from 
 	fahrzeiten_soll_ist fsi 
-	
-	where 
-	
+where 
 	linie ="7"
 	
 union 
@@ -28,21 +25,9 @@ select
 	datumzeit_soll_an_von as datumzeit_soll_an,
 	datumzeit_soll_ab_von as datumzeit_soll_ab,
 	timestampdiff (second, datumzeit_soll_an_von, datumzeit_ist_an_von) as delay
-	
-	from 
+from 
 	fahrzeiten_soll_ist fsi 
-	
-	where 
+where 
 	seq_von ="1" and
 	linie ="7";
-
-
-	
 alter table ankunftszeiten add id int primary key auto_increment first;
-
-
-	
-
-
-
-
