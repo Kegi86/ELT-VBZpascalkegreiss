@@ -423,6 +423,42 @@ order by s1.abfahrtszeit
 |Zürich, Butzenstrasse|07:59|09:36|11:13|
 
 ## Aufgabe 13
+### Script
+~~~~sql
+select
+    h.GPS_Latitude as lat,
+    h.GPS_Longitude as lng,
+    h2.halt_lang as name,
+  null as color,
+    SQRT(POW((h.GPS_Latitude - 47.37574), 2) +
+    POW((8.54718 - h.GPS_Longitude) * COS(h.GPS_Latitude), 2)) AS note
+FROM vbzdat.haltepunkt h
+inner join vbzdat.haltestelle h2 on
+    h.halt_id = h2.halt_id
+inner join vbzdat.ankunftszeiten a on
+    h.halt_punkt_id = a.haltepunkt_id
+inner join vbzdat.linie l on
+    a.fahrweg_id = l.fahrweg_id
+   
+where h.GPS_Latitude is not null and h.GPS_Longitude is not null and linie = "7"
+group by h2.halt_lang
+order by note
+limit 4;
+~~~~
+
+### Abfrageergebnis 
+
+"lat","lng","name","color","note"
+47.377794,8.548236,"Zürich, ETH/Universitätsspital",,0.0022942741289195662
+47.376916,8.544086,"Zürich, Central",,0.0032180592767303354
+47.378838,8.545304,"Zürich, Haldenegg",,0.0035907017464634743
+47.380358,8.548197,"Zürich, Haldenbach",,0.00472161627634625
+
+#### Dies als CSV exportiert und die Farbcodes eingestezt in der Spalte "color" alle ; ersetzt durch , und in https://maps.co/gis/ importiert
+
+### Screenshot Map - Mein Standort
+
+![Mein_Standort](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_13_distance.PNG)
 
 
 
