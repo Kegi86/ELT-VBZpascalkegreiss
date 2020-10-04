@@ -1,7 +1,7 @@
 # ELT-VBZpascalkegreiss
 
 ## Aufgabe 7
-[Script Aufgabe 7](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_07_timedif.sql "### Script Aufgabe 7")
+[Script Aufgabe 7](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_07_timedif.sql)
 ~~~~sql
 
 SELECT
@@ -56,8 +56,9 @@ LIMIT 40000;
 |7|2|2116|11|10|2316|2316|43731|45817|40108|99772|6|1|6|MIBU - BSTE für Ausfahrt|2019-05-06|2019-05-06 06:45:12|2019-05-06 06:45:46|2019-05-06 06:45:30|2019-05-06 06:45:58|2019-05-06|00:00:34|34|00:00:28|28|18|12|
 
 
-## Aufgabe 8 a Script
+## Aufgabe 8a 
 
+[Script Aufgabe 8a](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_08_a.sql)
 ~~~~sql
 select distinct 
 fsi.linie,
@@ -101,8 +102,8 @@ LIMIT 40000;
 |7|1|103|BUCH (Schleife) - WOLL für Einfahrt Glei|
 |7|1|9|BSTE - IRCH für Einfahrt|
 
-## Aufgabe 8 b
-
+## Aufgabe 8b
+[Script Aufgabe 8b](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_08_b.sql)
 ~~~~sql
 create view query_line
 as select distinct 
@@ -116,7 +117,7 @@ where
    linie = "7"
 ~~~~ 
 
-
+### Abfrageergebnis 8b
 |linie|richtung|fw_no|fw_lang|
 |-----|--------|-----|-------|
 |7|1|5|DEP2 - WOLL via Schleife|
@@ -143,7 +144,8 @@ where
 |7|1|103|BUCH (Schleife) - WOLL für Einfahrt Glei|
 |7|1|9|BSTE - IRCH für Einfahrt|
 
-## Aufgabe 8 c
+## Aufgabe 8c
+[Script Aufgabe 8c](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_08_c.sql)
 ~~~~sql
 CREATE TABLE linie (PRIMARY KEY (fahrweg_id))
 select distinct 
@@ -158,6 +160,7 @@ where
 linie ="7"
 ~~~~
 
+### Abfrageergebnis 8c
 |fahrweg_id|linie|richtung|fw_no|fw_lang|
 |----------|-----|--------|-----|-------|
 |99771|7|1|5|DEP2 - WOLL via Schleife|
@@ -185,7 +188,7 @@ linie ="7"
 |115114|7|1|117|GAR6 - MIBU E-Bus Gleisbau MIBU|
 
 ## Aufgabe 9
-### Neue Spalten hinzufügen
+[Script Neue Spalten hinzufügen](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_09_splatenhinzuf%C3%BCgen.sql)
 ~~~~sql
 alter table fahrzeiten_soll_ist add datumzeit_soll_an_nach datetime null;
 alter table fahrzeiten_soll_ist add datumzeit_ist_an_nach datetime null;
@@ -193,7 +196,7 @@ alter table fahrzeiten_soll_ist add datumzeit_soll_ab_nach datetime null;
 alter table fahrzeiten_soll_ist add datumzeit_ist_ab_nach datetime null;
 ~~~~
 
-### _nach Zeiten einlesen
+[Script _nach Zeiten einlesen](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_09_nach_zeiten%20einlesen.sql)
 
 ~~~~sql
 update fahrzeiten_soll_ist set datumzeit_soll_an_nach = date_add(str_to_date(datum__nach,'%Y-%m-%d'), interval soll_an_nach second);
@@ -202,7 +205,7 @@ update fahrzeiten_soll_ist set datumzeit_ist_ab_nach = date_add(str_to_date(datu
 update fahrzeiten_soll_ist set datumzeit_ist_an_nach = date_add(str_to_date(datum__nach,'%Y-%m-%d'), interval ist_an_nach1 second);
 ~~~~
 
-### Tabelle erstellen
+[Script Tabelle erstellen](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_09_createTable.sql)
 ~~~~sql
 drop table if exists ankunftszeiten;
 create table ankunftszeiten
@@ -239,7 +242,7 @@ alter table ankunftszeiten add id int primary key auto_increment first;
 
 ## Aufgabe 10
 
-### Script für Abfrage
+[Script Abfrage Delays](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_10_abfrage_delays.sql)
 ~~~~sql
 select 
     h2.halt_lang,
@@ -290,7 +293,7 @@ limit 20;
 
 
 
-### Script für CSV
+[Script Aufgabe 10 für CSV](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_10_Script_CSV.sql)
 ~~~~sql
 select
     h.GPS_Latitude as lat,
@@ -334,12 +337,12 @@ limit 20;
 |47.39822|8.533334|Zürich, Bucheggplatz||544|
 |47.391521|8.538706|Zürich, Schaffhauserplatz||536|
 
-#### Diese Abfrage Exportiert als CSV spalte Color mit diversen farben ergänzt und alle Trennzeichen zu , konvertiert. Danach auf https://maps.co/gis/ importiert.
+#### Diese Abfrage Exportiert als CSV spalte Color mit diversen farben ergänzt und alle Trennzeichen zu "," konvertiert. Danach auf https://maps.co/gis/ importiert.
 
 ### Screenshot von Karte (gewisse Namen gelöscht damit Stecknadel ersichtlich)
 ![20HS mit grösstem delay](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_10.PNG)
 
-## Aufgabe 11
+[Script Aufgabe 11](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_11_visualisierung_linie.sql)
 ~~~~sql
 select distinct
     h.GPS_Latitude as lat,
@@ -362,7 +365,7 @@ group by h2.halt_lang;
 ![Alle_HS_L7_ohne beschriftung](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_11_AlleHS_7_ohneBesch.PNG)
 
 ## Aufgabe 12
-### Script
+[Script Aufgabe 12](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_12_fahrplan_pivot.sql)
 
 ~~~~sql
 select s1.halt_lang,
@@ -422,7 +425,7 @@ order by s1.abfahrtszeit
 |Zürich, Butzenstrasse|07:59|09:36|11:13|
 
 ## Aufgabe 13
-### Script
+[Script Aufgabe 13](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_13_standort_distance.sql)
 ~~~~sql
 select
     h.GPS_Latitude as lat,
@@ -463,7 +466,7 @@ limit 4;
 
 ## Aufgabe 14
 
-[### Script]()
+[Script Aufgabe 14](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Scripts/Aufgabe_14_linie_distance.sql)
 ~~~~sql
 select
     fsi.linie,
