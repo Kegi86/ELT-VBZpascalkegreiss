@@ -220,6 +220,26 @@ inner join vbzdat.haltestelle h2 on
 |47.39822|8.533334|Zürich, Bucheggplatz||544|
 |47.391521|8.538706|Zürich, Schaffhauserplatz||536|
 
+## Aufgabe 11
+~~~~sql
+select distinct 
+	h.GPS_Latitude as lat,
+    h.GPS_Longitude as lng,
+   	null as color,
+    h2.halt_lang as note
+from
+    vbzdat.haltepunkt h
+inner join vbzdat.ankunftszeiten a on
+    h.halt_punkt_id = a.haltepunkt_id
+inner join vbzdat.haltestelle h2 on
+    h.halt_id = h2.halt_id
+
+group by h2.halt_lang;
+   
+~~~~
+
+![Haltestellen ohne Beschriftung](C:\Users\King Dingeling\git\ELT-VBZpascalkegreiss\Bilder_pascal_kegreiss)
+
 ## Aufgabe 12
 ### Script
 
