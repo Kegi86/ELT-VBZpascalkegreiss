@@ -1,7 +1,5 @@
 drop table if exists ankunftszeiten;
-
 create table ankunftszeiten
-
 select  
 	halt_punkt_id_nach as haltepunkt_id,
 	fahrweg_id,
