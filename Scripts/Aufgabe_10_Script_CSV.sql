@@ -10,12 +10,8 @@ inner join vbzdat.ankunftszeiten a on
     h.halt_punkt_id = a.haltepunkt_id
 inner join vbzdat.haltestelle h2 on
     h.halt_id = h2.halt_id
-
-   group by h2.halt_lang
-   
-   order by note desc
-  
- 
-   limit 20;
+group by h2.halt_lang
+order by note desc
+limit 20;
 
  	

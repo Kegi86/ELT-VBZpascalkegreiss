@@ -19,6 +19,4 @@ inner join vbzdat.linie l on
     a.fahrweg_id = l.fahrweg_id
 group by h2.halt_lang 
 order by delay desc
-
-
 limit 20;

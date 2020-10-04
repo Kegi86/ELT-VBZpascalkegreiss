@@ -240,7 +240,58 @@ alter table ankunftszeiten add id int primary key auto_increment first;
 
 ## Aufgabe 10
 
-### Script
+### Script für Abfrage
+~~~~sql
+select 
+    h2.halt_lang,
+   	h.GPS_Latitude,
+    h.GPS_Longitude,
+    a.id,
+    a.haltepunkt_id,
+    a.fahrweg_id,
+    l.linie,
+    a.datumzeit_ist_an,
+    a.datumzeit_soll_an,
+    max(a.delay) as delay
+from
+    vbzdat.ankunftszeiten a
+inner join vbzdat.haltepunkt h on 
+	h.halt_punkt_id  = a.haltepunkt_id 
+inner join vbzdat.haltestelle h2 on
+    h.halt_id = h2.halt_id
+inner join vbzdat.linie l on
+    a.fahrweg_id = l.fahrweg_id
+group by h2.halt_lang 
+order by delay desc
+limit 20;
+~~~~
+### Abfrageergebnis
+|halt_lang|GPS_Latitude|GPS_Longitude|id|haltepunkt_id|fahrweg_id|linie|datumzeit_ist_an|datumzeit_soll_an|delay|
+|---------|------------|-------------|--|-------------|----------|-----|----------------|-----------------|-----|
+|Zürich, Central|47.376916|8.544086|90|43696|115102|7|2019-05-12 00:56:21|2019-05-12 00:54:30|2891|
+|Zürich, Butzenstrasse|47.341084|8.530374|1710|43081|115099|7|2019-05-11 11:08:40|2019-05-11 11:08:24|2879|
+|Zürich, Morgental|47.343586|8.530174|1536|46188|115099|7|2019-05-11 11:09:53|2019-05-11 11:09:36|2873|
+|Zürich, Post Wollishofen|47.344869|8.53339|1545|44510|115099|7|2019-05-11 11:11:30|2019-05-11 11:11:00|2871|
+|Zch, Bhf.Wollishofen/Staubstr.|47.347212|8.532909|1546|46812|115099|7|2019-05-11 11:12:26|2019-05-11 11:11:54|2865|
+|Zürich, Billoweg|47.351836|8.531971|1590|49569|115099|7|2019-05-11 11:13:52|2019-05-11 11:13:12|2855|
+|Zürich, Brunaustrasse|47.35634|8.532196|1736|48006|115099|7|2019-05-11 11:15:01|2019-05-11 11:14:36|2842|
+|Zürich, Museum Rietberg|47.360925|8.531588|1551|46541|115099|7|2019-05-11 11:16:24|2019-05-11 11:15:54|2830|
+|Zürich, Stockerstrasse|47.367969|8.536195|1555|43040|115099|7|2019-05-11 11:20:55|2019-05-11 11:20:00|2817|
+|Zürich, Bahnhof Enge|47.364425|8.531475|1544|42521|115099|7|2019-05-11 11:17:57|2019-05-11 11:17:18|2813|
+|Zürich, Paradeplatz|47.36984|8.539093|1566|45342|115099|7|2019-05-11 09:11:47|2019-05-11 09:10:18|2809|
+|Zürich, Rennweg|47.373301|8.538304|1549|46599|115099|7|2019-05-11 09:13:17|2019-05-11 09:12:00|2797|
+|Zürich, Bahnhofstrasse/HB|47.376114|8.539501|1560|44298|115099|7|2019-05-11 09:14:57|2019-05-11 09:13:24|2796|
+|Zürich, Tunnelstrasse|47.366461|8.533012|1599|45992|115099|7|2019-05-11 11:19:31|2019-05-11 11:18:42|2795|
+|Zürich, Waldgarten|47.403567|8.557318|417|44928|115105|7|2019-05-11 11:14:24|2019-05-11 11:13:12|937|
+|Zürich, Tierspital|47.40231|8.55337|433|47373|115105|7|2019-05-11 11:13:29|2019-05-11 11:12:12|713|
+|Zürich, Wollishoferplatz|47.338309|8.530794|1|48081|99771|7|2019-05-06 05:59:39|2019-05-06 06:00:00|559|
+|Zürich, Laubiweg|47.394862|8.536457|86|47739|115102|7|2019-05-12 00:46:12|2019-05-12 00:44:48|550|
+|Zürich, Bucheggplatz|47.39822|8.533334|98|42909|115102|7|2019-05-12 00:44:48|2019-05-12 00:43:18|544|
+|Zürich, Schaffhauserplatz|47.391521|8.538706|119|48183|115102|7|2019-05-12 00:47:55|2019-05-12 00:46:06|536|
+
+
+
+### Script für CSV
 ~~~~sql
 select
     h.GPS_Latitude as lat,
@@ -254,14 +305,9 @@ inner join vbzdat.ankunftszeiten a on
     h.halt_punkt_id = a.haltepunkt_id
 inner join vbzdat.haltestelle h2 on
     h.halt_id = h2.halt_id
-
-   group by h2.halt_lang
-   
-   order by note desc
-  
- 
-   limit 20;
-
+group by h2.halt_lang
+order by note desc
+limit 20;
 ~~~~
 
 ### Ausgabe
@@ -296,20 +342,19 @@ inner join vbzdat.haltestelle h2 on
 
 ## Aufgabe 11
 ~~~~sql
-select distinct 
-	h.GPS_Latitude as lat,
+select distinct
+    h.GPS_Latitude as lat,
     h.GPS_Longitude as lng,
-   	null as color,
-    h2.halt_lang as note
+    h2.halt_lang as name,
+    null as color,
+    null as note
 from
     vbzdat.haltepunkt h
 inner join vbzdat.ankunftszeiten a on
     h.halt_punkt_id = a.haltepunkt_id
 inner join vbzdat.haltestelle h2 on
     h.halt_id = h2.halt_id
-
 group by h2.halt_lang;
-   
 ~~~~
 ### Screenshot Karte mit Note
 ![Alle_HS_L7_mit beschriftung](https://github.com/Kegi86/ELT-VBZpascalkegreiss/blob/master/Bilder_pascal_kegreiss/Aufgabe_11_AlleHS_7_mitBeschriftung.PNG)
@@ -376,6 +421,8 @@ order by s1.abfahrtszeit
 |Zürich, Post Wollishofen|07:56|09:33|11:11|
 |Zürich, Morgental|07:58|09:35|11:12|
 |Zürich, Butzenstrasse|07:59|09:36|11:13|
+
+## Aufgabe 13
 
 
 

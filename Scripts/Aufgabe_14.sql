@@ -1,21 +1,22 @@
 select
-     fsi.linie,
-        fsi.fahrt_id,
-     h2.halt_lang as von_haltestelle,
+    -- fsi.linie,
+    -- fsi.fahrt_id,
+    -- h2.halt_lang as von_haltestelle,
+    -- h4.halt_lang as nach_haltestelle,
+    -- h.GPS_Latitude,
+    -- h.GPS_Longitude,
+    fsi.linie,
+    h2.halt_lang as von_haltestelle,
     h4.halt_lang as nach_haltestelle,
-     SQRT(POW(69.1 * (h.GPS_Latitude - h3.GPS_Latitude), 2) + POW(69.1 * (h3.GPS_Longitude - h.GPS_Longitude)* COS(h.GPS_Latitude / 57.3), 2)) AS distance,
-     fsi.halt_punkt_id_von,
-    fsi.halt_punkt_id_nach,
-     h.GPS_Latitude,
-     h.GPS_Longitude,
+   	SQRT(POW((h.GPS_Latitude - h3.GPS_Latitude), 2) + POW((h3.GPS_Longitude - h.GPS_Longitude)* COS(h.GPS_Latitude), 2)) AS distance
     
-      h3.GPS_Latitude,
-     h3.GPS_Longitude,
-    
- 
-    fsi.betriebsdatum,
-    fsi.richtung
-    
+    -- fsi.halt_punkt_id_von,
+    -- fsi.halt_punkt_id_nach,
+   
+    -- h3.GPS_Latitude,
+    -- h3.GPS_Longitude,
+    -- fsi.betriebsdatum,
+    -- fsi.richtung
 from
     vbzdat.fahrzeiten_soll_ist fsi
 inner join vbzdat.haltepunkt h on
@@ -31,5 +32,5 @@ inner join vbzdat.haltestelle h4 on
     
     group by h2.halt_lang
     
-    order by distance desc
+    order by distance asc
 ;
