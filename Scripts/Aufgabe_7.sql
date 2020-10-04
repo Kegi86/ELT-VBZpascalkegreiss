@@ -30,5 +30,5 @@ FROM
 fahrzeiten_soll_ist fsi
 where 
 fsi.linie = "7" and betriebs_datum = "2019-05-06" and fw_kurz = "6" and fahrt_id = "40108" 
-
+order by seq_von 
 LIMIT 40000;
